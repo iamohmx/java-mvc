@@ -17,7 +17,7 @@ public class CarController {
         Cars = new Vector<Car>();
     }
 
-    public void addCar() {
+    public void execute() {
         try {
             scanner = new Scanner(System.in);
             System.out.println("Enter plate number: ");
