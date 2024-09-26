@@ -18,27 +18,18 @@ public class CarController {
         scanner = new Scanner(System.in);
     }
 
-    public void insertCar() {
-        System.out.print("Plate: ");
-        int plate = Integer.parseInt(scanner.nextLine());
-        System.out.print("Model: ");
-        String model = scanner.nextLine();
-        System.out.print("Make: ");
-        String make = scanner.nextLine();
-
-        Car car = new Car(plate, model, make);
-        cars.add(car);
-
+    public static void insertCar(Car car) {
         // Call execute method with the car details
+        System.out.println("CarController.insertCar() called");
         String query = "INSERT INTO cars (plate, model, make) VALUES (?, ?, ?);";
         try {
-            execute(query, plate, model, make);
+            execute(query, car.plate, car.model, car.make);
         } catch (SQLException e) {
             System.err.println("Failed to insert car: " + e.getMessage());
         }
     }
 
-    public void execute(String query, int plate, String model, String make) throws SQLException {
+    public static void execute(String query, int plate, String model, String make) throws SQLException {
          DBConnect conndb = new DBConnect(); // Create a new DBConnect instance
          Connection conn = conndb.connect();
          PreparedStatement stmt = conn.prepareStatement(query);

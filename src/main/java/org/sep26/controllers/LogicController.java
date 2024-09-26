@@ -7,6 +7,7 @@ public class LogicController {
         // Insert car logic here
         System.out.println("CAR Logic.insertCar() called");
         Car car = new Car(plate, model, make);
-
+        CarController carController = new CarController();
+        carController.insertCar(car);
     }
 }
