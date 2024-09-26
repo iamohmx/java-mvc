@@ -42,8 +42,6 @@ public class DBConnect {
 
         if (connection == null) {
             System.out.println("Failed to connect to the database");
-        } else {
-            System.out.println("Connected to the database");
         }
 
         return connection;

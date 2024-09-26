@@ -15,21 +15,22 @@ public class CarController {
 
     public CarController() {
         Cars = new Vector<Car>();
+        scanner = new Scanner(System.in);
     }
 
     public void execute() {
         try {
-            scanner = new Scanner(System.in);
-            System.out.println("Enter plate number: ");
-            int plate = scanner.nextInt();
-            System.out.println("Enter model: ");
-            String model = scanner.next();
-            System.out.println("Enter make: ");
-            String make = scanner.next();
+            System.out.print("Plate:");
+            int plate = Integer.parseInt(scanner.nextLine());
+            System.out.print("Model:");
+            String model = scanner.nextLine();
+            System.out.print("Make:");
+            String make = scanner.nextLine();
             Car car = new Car(plate, model, make);
+
 //        Cars.add(car);
-            String query = "INSERT INTO cars (plate, model, make) VALUES (?, ?, ?)";
-            System.out.println(query);
+            String query = "INSERT INTO cars (plate, model, make) VALUES (?, ?, ?);";
+//            System.out.println();
 
             try {
                 DBConnect conndb = new DBConnect();
@@ -40,6 +41,7 @@ public class CarController {
                 stmt.setString(2, car.model);
                 stmt.setString(3, car.make);
                 stmt.executeUpdate();
+                System.out.println("Car added successfully");
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
