@@ -64,12 +64,12 @@ public class CarController {
     }
 
     public void showCarByIdOrPlate() {
-            System.out.print("Enter the plate number of the car you want to show: ");
-        int plate = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter the ID or plate number of the car you want to show: ");
+        int plateOrId = Integer.parseInt(scanner.nextLine());
 
-        String query = "SELECT * FROM cars WHERE plate = ?;";
+        String query = "SELECT * FROM cars WHERE id = ? OR plate = ?;";
         try {
-            DBExecute.execute(plate, query);
+            DBExecute.execute(plateOrId, query);  // Send the same value for both parameters
         } catch (SQLException e) {
             System.err.println("Failed to show car: " + e.getMessage());
         }

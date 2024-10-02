@@ -89,27 +89,29 @@ public class DBExecute {
     }
 
     public static void execute(int plateOrId, String query) throws SQLException {
-    DBConnect conndb = new DBConnect();
-    Connection conn = conndb.connect();
-    PreparedStatement stmt = conn.prepareStatement(query);
+        DBConnect conndb = new DBConnect();
+        Connection conn = conndb.connect();
+        PreparedStatement stmt = conn.prepareStatement(query);
 
-    try {
-        stmt.setInt(1, plateOrId);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            System.out.println("Plate: " + rs.getInt("plate"));
-            System.out.println("Model: " + rs.getString("model"));
-            System.out.println("Make: " + rs.getString("make"));
-            System.out.println();
+        try {
+            // Set both the id and plate with the same input value (plateOrId)
+            stmt.setInt(1, plateOrId);  // This corresponds to the id in the query
+            stmt.setInt(2, plateOrId);  // This corresponds to the plate in the query
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("Plate: " + rs.getInt("plate"));
+                System.out.println("Model: " + rs.getString("model"));
+                System.out.println("Make: " + rs.getString("make"));
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while retrieving car: " + e.getMessage());
+            throw e;
+        } finally {
+            stmt.close();
+            conn.close();
         }
-    } catch (SQLException e) {
-        System.err.println("Error while retrieving car: " + e.getMessage());
-        throw e;
-    } finally {
-        stmt.close();
-        conn.close();
     }
-}
-
 
 }
