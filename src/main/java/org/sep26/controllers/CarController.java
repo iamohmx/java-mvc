@@ -52,7 +52,7 @@ public class CarController {
     }
 
     public void deleteCar(){
-            System.out.print("Enter the plate number of the car you want to delete: ");
+        System.out.print("Enter the plate number of the car you want to delete: ");
         int plate = Integer.parseInt(scanner.nextLine());
 
         String query = "DELETE FROM cars WHERE plate = ?;";

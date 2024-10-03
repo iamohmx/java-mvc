@@ -10,7 +10,7 @@ public class DBConnect {
 
     public DBConnect() {
         this.dbConfig = new DBConfig(
-                "jdbc:mariadb://localhost:3306/garage",
+                "jdbc:mariadb://localhost:3306/pachara101",
                 "root",
                 ""
         );

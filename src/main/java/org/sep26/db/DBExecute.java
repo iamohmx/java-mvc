@@ -94,7 +94,6 @@ public class DBExecute {
         PreparedStatement stmt = conn.prepareStatement(query);
 
         try {
-            // Set both the id and plate with the same input value (plateOrId)
             stmt.setInt(1, plateOrId);  // This corresponds to the id in the query
             stmt.setInt(2, plateOrId);  // This corresponds to the plate in the query
             ResultSet rs = stmt.executeQuery();
