@@ -1,7 +1,6 @@
 package org.sep26.models;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 public class Transaction {
     private int goods_id, quantity, amount;

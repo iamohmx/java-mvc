@@ -29,10 +29,8 @@ public class TransactionController {
         double price = Double.parseDouble(scanner.nextLine());
         System.out.print("Quantity: ");
         int quantity = Integer.parseInt(scanner.nextLine());
-        System.out.print("Amount: ");
-        int amount = Integer.parseInt(scanner.nextLine());
         Date date = new Date(currentTimeMillis());
-
+        int amount = quantity * (int) price;
         Transaction transaction = new Transaction(goods_id, date, quantity, amount, price);
         transactions.add(transaction);
 
@@ -47,6 +45,8 @@ public class TransactionController {
     }
 
     public void updateTransaction() {
+        Scanner scanner = new Scanner(System.in);
+
         // Update an existing transaction
         System.out.println("Enter transaction ID: ");
         int transId = Integer.parseInt(scanner.nextLine());
@@ -56,20 +56,20 @@ public class TransactionController {
         double price = Double.parseDouble(scanner.nextLine());
         System.out.print("Quantity: ");
         int quantity = Integer.parseInt(scanner.nextLine());
-        System.out.print("Amount: ");
-        int amount = Integer.parseInt(scanner.nextLine());
-        Date date = new Date(currentTimeMillis());
+
+        Date date = new Date(System.currentTimeMillis());
 
         String query = "UPDATE transactions SET goods_id = ?, date = ?, quantity = ?, amount = ?, price = ? WHERE trans_id = ?;";
-//        Transaction transaction = new Transaction(goods_id, date, quantity, amount, price);
-//        transactions.add(transaction);
+
         try {
-            // Call execute method with the transaction details
-            TransactionDB.update(query, goods_id, date, quantity, amount, price, transId);
+            // Call the update method with the correct parameters
+            TransactionDB.update(query, goods_id, date, quantity, price, transId);
         } catch (SQLException e) {
+            System.err.println("Failed to update transaction: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
+
 
     public void deleteTransaction() {
         // Delete an existing transaction

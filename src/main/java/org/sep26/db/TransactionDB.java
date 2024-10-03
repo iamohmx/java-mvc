@@ -10,7 +10,7 @@ public class TransactionDB {
         DBConnect conndb = new DBConnect();
         Connection conn = conndb.connect();
         PreparedStatement stmt = conn.prepareStatement(query);
-
+        amount = quantity * (int) price;
         try {
             stmt.setInt(1, goods_id);
             stmt.setDate(2, date);
@@ -74,16 +74,17 @@ public class TransactionDB {
         }
     }
 
-    public static void update(String query, int goods_id, Date date, int quantity, int amount, double price, int transId) throws SQLException {
+    public static void update(String query, int goods_id, Date date, int quantity, double price, int transId) throws SQLException {
         DBConnect conndb = new DBConnect();
         Connection conn = conndb.connect();
         PreparedStatement stmt = conn.prepareStatement(query);
 
         try {
+            double amount = quantity * price; // Keep amount as a double to avoid precision loss
             stmt.setInt(1, goods_id);
             stmt.setDate(2, date);
             stmt.setInt(3, quantity);
-            stmt.setInt(4, amount);
+            stmt.setDouble(4, amount); // Use double for amount
             stmt.setDouble(5, price);
             stmt.setInt(6, transId);
             stmt.executeUpdate();
@@ -96,6 +97,7 @@ public class TransactionDB {
             conn.close();
         }
     }
+
 
     public static void delete(String query, int trans_id) throws SQLException {
         DBConnect conndb = new DBConnect();
